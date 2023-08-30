@@ -17,6 +17,7 @@ public class PaySlip {
     private Date end;
     private  float sal;
     @ManyToOne
+    @JoinColumn(name = "payslip_for")
     private Employee emp;
 
     public Employee getEmp() {

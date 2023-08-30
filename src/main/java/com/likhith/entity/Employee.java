@@ -1,6 +1,7 @@
 package com.likhith.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,10 +14,29 @@ public class Employee {
     @Column(name = "emp_name", length = 20)
     private String name;
     @OneToOne
+    @JoinColumn(name = "access_id")
     private AccessCard accessCard;
     @OneToMany
             (mappedBy = "emp")
     private List<PaySlip> paySlips;
+    @ManyToMany
+    @JoinTable(name = "EG_SUBS",
+    joinColumns = @JoinColumn(name = "EMP_ID"),
+            inverseJoinColumns = @JoinColumn(name = "EMAILName_ID")
+    )
+    private List<EmailGroup> emailGroups=new ArrayList<>();
+
+    public void addGroup(EmailGroup eg){
+        this.emailGroups.add(eg);
+    }
+
+    public List<EmailGroup> getEmailGroups() {
+        return emailGroups;
+    }
+
+    public void setEmailGroups(List<EmailGroup> emailGroups) {
+        this.emailGroups = emailGroups;
+    }
 
     public List<PaySlip> getPaySlips() {
         return paySlips;

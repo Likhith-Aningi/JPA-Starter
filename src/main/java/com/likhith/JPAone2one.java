@@ -13,8 +13,8 @@ public class JPAone2one {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaStarter");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        Employee emp = new Employee("Likhith-jpaStarter4");
-        AccessCard accessCard = new AccessCard(Floor.ZERO,false);
+        Employee emp = new Employee("Likhith-forOne2One");
+        AccessCard accessCard = new AccessCard(Floor.FIRST,true);
         accessCard.setEmployee(emp);
         emp.setAccessCard(accessCard);
         System.out.println(emp+"\n"+accessCard);
