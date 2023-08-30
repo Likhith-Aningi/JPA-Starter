@@ -1,6 +1,7 @@
 package com.likhith.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TEST_EMP")
@@ -9,8 +10,30 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id")
     private int id;
-    @Column(name="emp_name",length = 20)
+    @Column(name = "emp_name", length = 20)
     private String name;
+    @OneToOne
+    private AccessCard accessCard;
+    @OneToMany
+            (mappedBy = "emp")
+    private List<PaySlip> paySlips;
+
+    public List<PaySlip> getPaySlips() {
+        return paySlips;
+    }
+
+    public void setPaySlips(List<PaySlip> paySlips) {
+        this.paySlips = paySlips;
+    }
+
+    public AccessCard getAccessCard() {
+        return accessCard;
+    }
+
+    public void setAccessCard(AccessCard accessCard) {
+        this.accessCard = accessCard;
+    }
+
     public Employee(String ename) {
         this.name = ename;
     }
@@ -18,13 +41,6 @@ public class Employee {
     public Employee() {
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "eid=" + id +
-                ", ename='" + name + '\'' +
-                '}';
-    }
 
     public int getId() {
         return id;
@@ -40,5 +56,14 @@ public class Employee {
 
     public void setName(String ename) {
         this.name = ename;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", accessCard=" + accessCard +
+                '}';
     }
 }
